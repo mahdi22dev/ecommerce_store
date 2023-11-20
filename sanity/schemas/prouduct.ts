@@ -19,7 +19,7 @@ export const product = {
       name: "price",
       title: "Price",
       type: "number",
-      validation: (Rule: any) => Rule.required().positive(),
+      validation: (Rule: any) => Rule.required().positive().max(10000),
     },
     {
       name: "category",
@@ -32,14 +32,7 @@ export const product = {
       name: "images",
       title: "Images",
       type: "array",
-      of: [
-        {
-          type: "reference",
-          to: {
-            type: "productImage",
-          },
-        },
-      ],
+      of: [{ type: "reference", to: { type: "productImage" } }],
       validation: (rule: any) => rule.required(),
     },
   ],
