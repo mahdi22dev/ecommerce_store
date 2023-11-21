@@ -26,7 +26,7 @@ export const product = {
       title: "Color",
       type: "array",
       of: [{ type: "reference", to: { type: "colorOption" } }],
-      validation: (Rule: any) => Rule.required().positive().max(10000),
+      validation: (Rule: any) => Rule.required().positive(),
     },
     {
       name: "category",

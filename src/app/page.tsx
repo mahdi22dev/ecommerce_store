@@ -1,13 +1,13 @@
-"use client";
-import Button from "@/components/ui/Button";
-import { useState } from "react";
+import { allType } from "@/lib/sanityQuerieTypes";
+import { allProductSchema } from "@/lib/schemaValidation";
+import { allFetch } from "@/server-actions/sanityActions";
 
-export default function Home() {
-  const [count, setCount] = useState(0);
-  const [data, setData] = useState([]);
-  const onClick = () => {
-    setCount(count + 1);
-  };
+// false | 'force-cache' | 0 | number
+export default async function Home() {
+  const products: allType = await allFetch();
+  console.log(products);
+  const validProductSchema = allProductSchema.safeParse(products);
+  console.log(validProductSchema);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100'>
