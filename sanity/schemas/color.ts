@@ -15,5 +15,11 @@ export const color = {
       type: "string",
       validation: (Rule: any) => Rule.required(),
     },
+    {
+      name: "isHex",
+      title: "Is it hex or not?",
+      type: "boolean",
+      validation: (Rule: any) => Rule.required(),
+    },
   ],
 };
