@@ -47,7 +47,16 @@ function Navbar() {
           <User />
         </div>
       </nav>
-
+      {/* black modal */}
+      <div
+        className={`${
+          toggle ? "fixed" : "hidden"
+        } bg-black/50 top-0 left-0 bottom-0 right-0`}
+        onClick={() => {
+          setToggle(false);
+        }}
+      ></div>
+      {/* responsive navbart part */}
       <AnimatePresence>
         {toggle && (
           <motion.div
