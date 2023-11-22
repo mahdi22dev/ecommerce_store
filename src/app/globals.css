@@ -5,6 +5,14 @@
 .flex-btw {
   @apply flex justify-between items-center;
 }
-/* .flex-center-center {
-  @apply flex justify-between;
-} */
+.cursor {
+  @apply cursor-pointer;
+}
+.open {
+  transform: translate(-50%, -50%);
+  transition: transform 0.9s ease;
+}
+.hide {
+  transform: translate(-200%, -50%);
+  transition: transform 0.9s ease;
+}

@@ -1,5 +1,5 @@
-import { allType } from "@/lib/sanityQuerieTypes";
-import { allProductSchema } from "@/lib/schemaValidation";
+import { allType } from "@/lib/sanity/sanityQuerieTypes";
+import { allProductSchema } from "@/lib/schema/schemaValidation";
 import { allFetch } from "@/server-actions/sanityActions";
 
 export default async function Home() {
@@ -8,6 +8,6 @@ export default async function Home() {
   // console.log(validProductSchema);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100'></main>
+    <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100 pb-[200%]'></main>
   );
 }

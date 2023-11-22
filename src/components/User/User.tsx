@@ -3,7 +3,6 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 function User() {
   const { isSignedIn, user, isLoaded } = useUser();
-  console.log("Loading state: " + isLoaded);
   return (
     <div className='min-w-[50px]'>
       {isSignedIn ? (
