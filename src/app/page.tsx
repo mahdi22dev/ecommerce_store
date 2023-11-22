@@ -10,8 +10,6 @@ export default async function Home() {
   console.log(validProductSchema);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100'>
-      <h1>ecommerce store</h1>
-    </main>
+    <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100'></main>
   );
 }
