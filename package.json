@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^4.28.0",
+    "@clerk/nextjs": "^4.27.1",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.20.0",
     "@vercel/og": "^0.5.20",

@@ -1,7 +1,12 @@
-import React from "react";
+"use client";
+import { SignIn } from "@clerk/clerk-react";
 
 function signIn() {
-  return <div></div>;
+  return (
+    <div>
+      <SignIn />
+    </div>
+  );
 }
 
 export default signIn;
