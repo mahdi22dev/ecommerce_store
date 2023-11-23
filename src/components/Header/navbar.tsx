@@ -5,16 +5,22 @@ import User from "../User/User";
 import { FiShoppingCart } from "react-icons/fi";
 import { MdCloseFullscreen } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
+import { navlinks } from "@/config/nav-links";
+import { navLinksTypes } from "@/lib/typess";
+import Link from "next/link";
 
 function Navbar() {
   const [toggle, setToggle] = useState<boolean>(false);
   const [isSticky, setIsSticky] = useState<boolean>(false);
+  const [hide, setHidden] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const threshold = 200;
+      const hideThreshold = 3000;
       setIsSticky(scrollPosition > threshold);
+      setHidden(scrollPosition > hideThreshold);
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -25,12 +31,12 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`${
-          isSticky && " bg-white shadow-md"
-        } sticky top-0 flex justify-between items-center p-10 w-full h-24 px-[5%] lg:px-[15%] bg-gray-100 transition-colors duration-300`}
+        className={`${isSticky && "bg-white shadow-md"} ${
+          hide ? "block" : "sticky"
+        } top-0 flex justify-between items-center p-10 w-full h-24 px-[5%] lg:px-[15%] bg-background transition-colors duration-300`}
       >
         <div
-          className='flex-btw gap-2 cursor text-lg transition-all duration-300 hover:text-red-500 focus:text-red-500'
+          className='flex-btw gap-2 cursor text-lg transition-all duration-300 hover:text-primary focus:text-primary'
           onClick={() => {
             setToggle(!toggle);
           }}
@@ -40,7 +46,7 @@ function Navbar() {
         </div>
         <div>logo</div>
         <div className='flex-btw gap-4'>
-          <div className='cursor'>
+          <div className='cursor hover:text-primary focus:text-primary'>
             <FiShoppingCart />
           </div>
           <div>orders</div>
@@ -60,14 +66,14 @@ function Navbar() {
       <AnimatePresence>
         {toggle && (
           <motion.div
-            className={`fixed top-0 left-0 bottom-0 right-2/4 w-full sm:w-2/4 lg:w-1/4 bg-white p-10 `}
+            className={`fixed top-0 left-0 bottom-0 right-2/4 w-full sm:w-2/4 lg:w-1/4 bg-background  `}
             initial={{ x: "-100vw" }}
             animate={{ x: 0 }}
             exit={{ x: "-100vw" }}
             transition={{ duration: 0.8 }}
             key={"navbar"}
           >
-            <div className='w-full h-full flex justify-end'>
+            <div className='flex justify-end pt-12 px-12 pb-4'>
               <MdCloseFullscreen
                 className='text-xl hover:scale-125 focus:scale-125 transition-all duration-200 cursor'
                 onClick={() => {
@@ -75,6 +81,21 @@ function Navbar() {
                 }}
               />
             </div>
+            <ul className='flex justify-between flex-col mt-7'>
+              {navlinks.map((link: navLinksTypes) => {
+                return (
+                  <Link
+                    onClick={() => {
+                      setToggle(false);
+                    }}
+                    className='p-3 pl-8 font-medium hover:opacity-70 hover:pl-14 transition-[padding] duration-500 text-left resnavbaranimation showastick '
+                    href={link.link}
+                  >
+                    {link.title}
+                  </Link>
+                );
+              })}
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>

@@ -2,9 +2,9 @@ import { SignIn } from "@clerk/nextjs";
 
 function page() {
   return (
-    <div>
+    <main className='w-full min-h-[80vh] center'>
       <SignIn />
-    </div>
+    </main>
   );
 }
 

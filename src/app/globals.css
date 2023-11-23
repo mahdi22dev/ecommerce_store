@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply bg-background;
+}
 .flex-btw {
   @apply flex justify-between items-center;
 }
@@ -15,4 +18,14 @@
 .hide {
   transform: translate(-200%, -50%);
   transition: transform 0.9s ease;
+}
+
+.center {
+  @apply flex justify-center items-center;
+}
+.resnavbaranimation:hover {
+  @apply border border-secondary border-opacity-50  bg-opacity-10 bg-primary;
+}
+.resnavbaranimation:focus {
+  @apply border border-secondary border-opacity-50  bg-opacity-10 bg-primary;
 }

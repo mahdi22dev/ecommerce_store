@@ -7,6 +7,6 @@ export default async function Home() {
   // const validProductSchema = allProductSchema.safeParse(products);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-gray-100 pb-[200%]'></main>
+    <main className='flex min-h-screen flex-col items-center justify-between p-24 pb-[200%]'></main>
   );
 }
