@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Header/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import StoreProvider from "@/lib/redux/StoreProvider";
 
 const lato = Lato({ weight: "400" });
 
@@ -17,14 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang='en'>
-        <body className={lato.className}>
-          <Navbar />
+    <StoreProvider>
+      <ClerkProvider>
+        <html lang='en'>
+          <body className={lato.className}>
+            <Navbar />
 
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
+    </StoreProvider>
   );
 }
