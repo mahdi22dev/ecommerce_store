@@ -2,7 +2,7 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { openCloseCart } from "@/lib/redux/cart/cartSlice";
+import { openCloseCart, addToCart } from "@/lib/redux/cart/cartSlice";
 function Cart() {
   const dispatch = useDispatch();
   return (
@@ -12,6 +12,9 @@ function Cart() {
           className='hover:text-red-500 focus:text-red-500'
           onClick={() => {
             dispatch(openCloseCart());
+            dispatch(
+              addToCart({ id: 1, data: "test data", seconddata: "weff" })
+            );
           }}
         />
       </div>

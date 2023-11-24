@@ -11,10 +11,11 @@ import Link from "next/link";
 import Cart from "../Cart/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { openCloseCart } from "@/lib/redux/cart/cartSlice";
+import { RootState } from "@/lib/redux/store";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const { isCartopen } = useSelector((state: any) => state.cart);
+  const { isCartopen } = useSelector((state: RootState) => state.cart);
   const [toggle, setToggle] = useState<boolean>(false);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [hide, setHidden] = useState<boolean>(false);

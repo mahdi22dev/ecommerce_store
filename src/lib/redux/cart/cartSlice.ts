@@ -7,10 +7,15 @@ export const cartSlice = createSlice({
     openCloseCart: (state) => {
       state.isCartopen = !state.isCartopen;
     },
+    addToCart: (state, actions) => {
+      // connect to database and add to cart
+      console.log(actions.payload);
+      console.log(actions.type);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { openCloseCart } = cartSlice.actions;
+export const { openCloseCart, addToCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
