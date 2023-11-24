@@ -8,8 +8,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { navlinks } from "@/config/nav-links";
 import { navLinksTypes } from "@/lib/typess";
 import Link from "next/link";
+import Cart from "../Cart/cart";
+import { useDispatch, useSelector } from "react-redux";
+import { openCloseCart } from "@/lib/redux/cart/cartSlice";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const { isCartopen } = useSelector((state: any) => state.cart);
   const [toggle, setToggle] = useState<boolean>(false);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [hide, setHidden] = useState<boolean>(false);
@@ -45,9 +50,14 @@ function Navbar() {
           <p className='hidden sm:block'>menu</p>
         </div>
         <div>logo</div>
-        <div className='flex-btw gap-4'>
-          <div className='cursor hover:text-primary focus:text-primary'>
-            <FiShoppingCart />
+        <div className='flex-btw gap-4 relative'>
+          <div className='cursor hover:text-primary focus:text-primary '>
+            <FiShoppingCart
+              onClick={() => {
+                dispatch(openCloseCart());
+              }}
+            />
+            {isCartopen && <Cart />}
           </div>
           <div>orders</div>
           <User />

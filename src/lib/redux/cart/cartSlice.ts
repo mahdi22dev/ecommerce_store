@@ -1,14 +1,11 @@
-"use client";
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = { open: false };
 
 export const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: { isCartopen: false },
   reducers: {
     openCloseCart: (state) => {
-      state.open = !state.open;
+      state.isCartopen = !state.isCartopen;
     },
   },
 });
