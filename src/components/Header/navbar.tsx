@@ -6,7 +6,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { MdCloseFullscreen } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
 import { navlinks } from "@/config/nav-links";
-import { navLinksTypes } from "@/lib/typess";
+import { navLinksTypes } from "@/lib/types";
 import Link from "next/link";
 import Cart from "../Cart/cart";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +39,7 @@ function Navbar() {
       <nav
         className={`${isSticky && "bg-white shadow-md"} ${
           hide ? "block" : "sticky"
-        } top-0 flex justify-between items-center p-10 w-full h-24 px-[5%] lg:px-[15%] bg-background transition-colors duration-300`}
+        } top-0 flex justify-between items-center p-10 w-full h-24 px-[5%] lg:px-[15%] bg-background transition-colors duration-300 z-[1000]`}
       >
         <div
           className='flex-btw gap-2 cursor text-lg transition-all duration-300 hover:text-primary focus:text-primary'
@@ -52,15 +52,19 @@ function Navbar() {
         </div>
         <div>logo</div>
         <div className='flex-btw gap-4 relative'>
-          <div className='cursor hover:text-primary focus:text-primary '>
+          <div className='flex-btw gap-1 cursor hover:text-primary focus:text-primary '>
             <FiShoppingCart
               onClick={() => {
                 dispatch(openCloseCart());
               }}
             />
+            <p>0</p>
             {isCartopen && <Cart />}
           </div>
-          <div>orders</div>
+          <div className='flex-btw gap-1'>
+            <p>orders</p>
+            <p>0</p>
+          </div>
           <User />
         </div>
       </nav>
@@ -68,7 +72,7 @@ function Navbar() {
       <div
         className={`${
           toggle ? "fixed" : "hidden"
-        } bg-black/50 top-0 left-0 bottom-0 right-0`}
+        } bg-black/50 top-0 left-0 bottom-0 right-0 z-[1000]`}
         onClick={() => {
           setToggle(false);
         }}
@@ -77,7 +81,7 @@ function Navbar() {
       <AnimatePresence>
         {toggle && (
           <motion.div
-            className={`fixed top-0 left-0 bottom-0 right-2/4 w-full sm:w-2/4 lg:w-1/4 bg-background  `}
+            className={`fixed top-0 left-0 bottom-0 right-2/4 w-full sm:w-2/4 lg:w-1/4 bg-background z-[1000] `}
             initial={{ x: "-100vw" }}
             animate={{ x: 0 }}
             exit={{ x: "-100vw" }}
