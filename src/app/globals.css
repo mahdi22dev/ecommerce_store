@@ -11,6 +11,9 @@ html {
 .cursor {
   @apply cursor-pointer;
 }
+.max-w {
+  @apply max-w-[1360px];
+}
 .open {
   transform: translate(-50%, -50%);
   transition: transform 0.9s ease;
