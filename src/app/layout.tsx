@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <StoreProvider>
-      <ClerkProvider afterSignInUrl='/extra' afterSignUpUrl='/extra'>
+      <ClerkProvider>
         <html lang='en'>
           <body className={lato.className}>
             <Navbar />

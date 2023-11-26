@@ -2,7 +2,7 @@ export const IntrouductionPageGridData = [
   {
     id: 1,
     image:
-      "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb",
     category: "FUNITURE",
   },
   {

@@ -1,8 +1,4 @@
 import { IntrouductionPageGridData } from "@/config/data";
-import { allType } from "@/lib/sanity/sanityQuerieTypes";
-import Image from "next/image";
-import React from "react";
-import Link from "next/link";
 import FirstSingleGrid from "./FirstSingleGrid";
 
 function FirstGrid() {

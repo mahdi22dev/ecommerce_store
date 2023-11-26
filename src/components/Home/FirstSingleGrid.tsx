@@ -14,7 +14,9 @@ export default function FirstSingleGrid({ data, isBigGrid }: dataType) {
         isBigGrid && "md:col-span-2 "
       }`}
     >
-      <p className='absolute top-10 left-10 z-50'>{data.category}</p>
+      <p className='absolute top-10 left-10 z-50 font-extrabold'>
+        {data.category}
+      </p>
       <Image
         src={data.image}
         alt={data.category}

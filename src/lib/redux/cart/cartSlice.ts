@@ -1,3 +1,4 @@
+import { FakeData } from "@/config/fakedata";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const cartSlice = createSlice({
@@ -12,10 +13,13 @@ export const cartSlice = createSlice({
       console.log(actions.payload);
       console.log(actions.type);
     },
+    fetchCart: (): any => {
+      return FakeData;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { openCloseCart, addToCart } = cartSlice.actions;
+export const { openCloseCart, addToCart, fetchCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

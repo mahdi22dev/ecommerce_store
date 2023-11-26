@@ -23,7 +23,7 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const threshold = 200;
+      const threshold = 500;
       const hideThreshold = 3000;
       setIsSticky(scrollPosition > threshold);
       setHidden(scrollPosition > hideThreshold);
