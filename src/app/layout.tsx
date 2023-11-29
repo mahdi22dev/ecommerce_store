@@ -5,7 +5,7 @@ import Navbar from "@/components/Header/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import StoreProvider from "@/lib/redux/StoreProvider";
 
-const lato = Lato({ weight: "400" });
+const lato = Lato({ weight: "400", preload: false });
 
 export const metadata: Metadata = {
   title: "E-commerce Store",

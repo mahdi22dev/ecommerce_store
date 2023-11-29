@@ -1,7 +1,7 @@
 import React from "react";
 
 function page() {
-  return <div>checkout</div>;
+  return <main className='w-full min-h-screen'></main>;
 }
 
 export default page;
