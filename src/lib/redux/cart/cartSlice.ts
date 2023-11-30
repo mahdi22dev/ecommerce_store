@@ -10,9 +10,8 @@ export const cartSlice = createSlice({
       state.isCartopen = !state.isCartopen;
     },
     addToCart: (state, actions) => {
-      // connect to database and add to cart
-      console.log(actions.payload);
-      console.log(actions.type);
+      const itemid = actions.payload;
+      console.log(itemid);
     },
     fetchCart: (state): any => {
       state.CartItems = [...FakeData];

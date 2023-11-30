@@ -9,14 +9,24 @@ generator client {
 
 model User {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  clerkid       String   @unique
+  UserId        String   @unique
   name          String
   email         String   @unique
   createdAt     DateTime? @default(now())
+  CartItems     CartItem[]    
+}
+
+
+model CartItem {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  ItemId        String   @unique
+  user          User     @relation(fields: [UserId], references: [id])   
+  UserId        String   @db.ObjectId
 }
 
 model Address {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  Userid        String   @unique
   address       String
   city          String
   town          String
