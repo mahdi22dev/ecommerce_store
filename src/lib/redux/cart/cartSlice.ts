@@ -1,17 +1,22 @@
 import { FakeData, ItemType } from "@/config/fakedata";
+import { addtoCartAction } from "@/server-actions/dbActions";
 import { createSlice } from "@reduxjs/toolkit";
 
 type cartItemsArray = ItemType[];
+
 export const cartSlice = createSlice({
   name: "cart",
-  initialState: { isCartopen: false, CartItems: [] as cartItemsArray },
+  initialState: {
+    isCartopen: false,
+    CartItems: [] as cartItemsArray,
+    addToCartLoading: false,
+  },
   reducers: {
     openCloseCart: (state) => {
       state.isCartopen = !state.isCartopen;
     },
     addToCart: (state, actions) => {
-      const itemid = actions.payload;
-      console.log(itemid);
+      state.addToCartLoading = actions.payload;
     },
     fetchCart: (state): any => {
       state.CartItems = [...FakeData];

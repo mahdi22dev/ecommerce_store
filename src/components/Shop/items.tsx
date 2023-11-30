@@ -1,5 +1,4 @@
 import { allType } from "@/lib/sanity/sanityQuerieTypes";
-import { allProductSchema } from "@/lib/schema/schemaValidation";
 import { allFetch } from "@/server-actions/sanityActions";
 import React from "react";
 import ItemCard from "./ItemCard";

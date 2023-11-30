@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Header/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import StoreProvider from "@/lib/redux/StoreProvider";
+import UserIdUpdater from "@/components/User/UserIdUpdater";
 
 const lato = Lato({ weight: "400", preload: false });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <ClerkProvider>
         <html lang='en'>
           <body className={lato.className}>
+            <UserIdUpdater />
             <Navbar />
             {children}
           </body>
