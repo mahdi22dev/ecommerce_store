@@ -1,7 +1,7 @@
 "use server";
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
+
 export const addtoCartAction = async (
   userId: string,
   itemId: string,
@@ -58,6 +58,23 @@ export const addtoCartAction = async (
         },
       });
     }
+  } catch (error: any) {
+    console.error(error.message);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const fetchCartItems = async (userId: string) => {
+  try {
+    const cartItems = await prisma.cartItem.findMany({
+      where: {
+        UserId: userId,
+      },
+    });
+    console.log(cartItems);
+
+    return cartItems;
   } catch (error: any) {
     console.error(error.message);
   } finally {

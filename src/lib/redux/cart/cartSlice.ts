@@ -10,6 +10,7 @@ export const cartSlice = createSlice({
     isCartopen: false,
     CartItems: [] as cartItemsArray,
     addToCartLoading: false,
+    cartLength: 0,
   },
   reducers: {
     openCloseCart: (state) => {
@@ -20,6 +21,9 @@ export const cartSlice = createSlice({
     },
     fetchCart: (state): any => {
       state.CartItems = [...FakeData];
+    },
+    fetchCartCopy: (state, actions): any => {
+      state.CartItems = actions.payload;
     },
     removeFromCart: (state, actions) => {
       const id = actions.payload;

@@ -14,7 +14,7 @@ type item = {
 };
 
 function ItemCard({ item }: item) {
-  const { userId } = useSelector((state: RootState) => state.user);
+  const { userId, isSignedIn } = useSelector((state: RootState) => state.user);
   const { addToCartLoading } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   const {} = useSelector((state: RootState) => state.cart);
@@ -24,12 +24,16 @@ function ItemCard({ item }: item) {
       <button
         onClick={async () => {
           try {
-            dispatch(addToCart(false));
-            console.log(addToCartLoading);
-            const data = { itemId: item._id, userId: userId };
-            await addtoCartAction(data.userId, data.itemId);
-            dispatch(addToCart(true));
-            console.log(addToCartLoading);
+            if (isSignedIn) {
+              dispatch(addToCart(false));
+              const data = { itemId: item._id, userId: userId };
+              await addtoCartAction(data.userId, data.itemId);
+              dispatch(addToCart(true));
+            } else {
+              const cartItemObj = { ItemId: item._id, Quantity: 1 };
+              const jsonString = JSON.stringify(cartItemObj);
+              localStorage.setItem("cartItem:" + item._id, jsonString);
+            }
           } catch (error) {
             console.log(error);
           }

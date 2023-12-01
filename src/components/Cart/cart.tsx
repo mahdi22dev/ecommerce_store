@@ -13,9 +13,13 @@ import { RootState } from "@/lib/redux/store";
 function Cart() {
   const dispatch = useDispatch();
   const { CartItems } = useSelector((state: RootState) => state.cart);
+  const { isSignedIn } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    dispatch(fetchCart());
+    if (isSignedIn) {
+      dispatch(fetchCart());
+    } else {
+    }
   }, []);
 
   return (

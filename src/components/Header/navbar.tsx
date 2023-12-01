@@ -15,7 +15,9 @@ import { RootState } from "@/lib/redux/store";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const { isCartopen } = useSelector((state: RootState) => state.cart);
+  const { isCartopen, cartLength } = useSelector(
+    (state: RootState) => state.cart
+  );
   const [toggle, setToggle] = useState<boolean>(false);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [hide, setHidden] = useState<boolean>(false);
@@ -58,7 +60,7 @@ function Navbar() {
                 dispatch(openCloseCart());
               }}
             />
-            <p>0</p>
+            <p>{cartLength}</p>
             {isCartopen && <Cart />}
           </div>
           <div className='flex-btw gap-1'>
