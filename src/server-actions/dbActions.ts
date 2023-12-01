@@ -5,7 +5,8 @@ const prisma = new PrismaClient();
 export const addtoCartAction = async (
   userId: string,
   itemId: string,
-  Quantity: number = 1
+  Quantity: number = 1,
+  price: number
 ): Promise<void> => {
   console.log(userId);
 
@@ -50,6 +51,7 @@ export const addtoCartAction = async (
         data: {
           ItemId: itemId,
           Quantity: Quantity,
+          price: price,
           user: {
             connect: {
               UserId: userId,
@@ -66,14 +68,17 @@ export const addtoCartAction = async (
 };
 
 export const fetchCartItems = async (userId: string) => {
+  console.log(userId);
+
   try {
     const cartItems = await prisma.cartItem.findMany({
       where: {
-        UserId: userId,
+        user: {
+          UserId: userId,
+        },
       },
     });
     console.log(cartItems);
-
     return cartItems;
   } catch (error: any) {
     console.error(error.message);

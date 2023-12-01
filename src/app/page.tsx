@@ -1,13 +1,16 @@
 import FirstGrid from "@/components/Home/FirstGrid";
 import { allType } from "@/lib/sanity/sanityQuerieTypes";
 import { allProductSchema } from "@/lib/schema/schemaValidation";
+import { fetchCartItems } from "@/server-actions/dbActions";
 import { allFetch } from "@/server-actions/sanityActions";
 import Image from "next/image";
 import Link from "next/link";
 export default async function Home() {
   try {
-    const products: allType = await allFetch();
-    const validProductSchema = allProductSchema.safeParse(products);
+    // const products: allType = await allFetch();
+    // const validProductSchema = allProductSchema.safeParse(products);
+    // const data = await fetchCartItems("6568c8676e89736e002d36ae");
+    // console.table(data);
   } catch (error) {
     throw error;
   }

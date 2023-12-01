@@ -3,6 +3,15 @@ import { addtoCartAction } from "@/server-actions/dbActions";
 import { createSlice } from "@reduxjs/toolkit";
 
 type cartItemsArray = ItemType[];
+type dataArray = {
+  data: {
+    id: string;
+    ItemId: string;
+    Quantity: number;
+    UserId: string;
+    price: number;
+  }[];
+};
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -10,6 +19,7 @@ export const cartSlice = createSlice({
     isCartopen: false,
     CartItems: [] as cartItemsArray,
     addToCartLoading: false,
+    fetchLoading: false,
     cartLength: 0,
   },
   reducers: {
@@ -19,11 +29,14 @@ export const cartSlice = createSlice({
     addToCart: (state, actions) => {
       state.addToCartLoading = actions.payload;
     },
-    fetchCart: (state): any => {
+    fetchCart: (state, actions) => {
+      state.CartItems = actions.payload;
+    },
+    fetchCartCopy: (state): any => {
       state.CartItems = [...FakeData];
     },
-    fetchCartCopy: (state, actions): any => {
-      state.CartItems = actions.payload;
+    fetchCartLoading: (state, actions) => {
+      state.fetchLoading = actions.payload;
     },
     removeFromCart: (state, actions) => {
       const id = actions.payload;
@@ -36,7 +49,13 @@ export const cartSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { openCloseCart, addToCart, fetchCart, removeFromCart } =
-  cartSlice.actions;
+export const {
+  openCloseCart,
+  addToCart,
+  fetchCart,
+  removeFromCart,
+  fetchCartCopy,
+  fetchCartLoading,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

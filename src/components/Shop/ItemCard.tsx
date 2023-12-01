@@ -26,8 +26,12 @@ function ItemCard({ item }: item) {
           try {
             if (isSignedIn) {
               dispatch(addToCart(false));
-              const data = { itemId: item._id, userId: userId };
-              await addtoCartAction(data.userId, data.itemId);
+              const data = {
+                itemId: item._id,
+                userId: userId,
+                price: item.price,
+              };
+              await addtoCartAction(data.userId, data.itemId, 1, data.price);
               dispatch(addToCart(true));
             } else {
               const cartItemObj = { ItemId: item._id, Quantity: 1 };

@@ -1,26 +1,13 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { IoClose } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCart,
-  openCloseCart,
-  removeFromCart,
-} from "@/lib/redux/cart/cartSlice";
+import { useDispatch } from "react-redux";
+import { openCloseCart, removeFromCart } from "@/lib/redux/cart/cartSlice";
 import Link from "next/link";
-import { FakeData, ItemType } from "@/config/fakedata";
-import { RootState } from "@/lib/redux/store";
-function Cart() {
-  const dispatch = useDispatch();
-  const { CartItems } = useSelector((state: RootState) => state.cart);
-  const { isSignedIn } = useSelector((state: RootState) => state.user);
 
-  useEffect(() => {
-    if (isSignedIn) {
-      dispatch(fetchCart());
-    } else {
-    }
-  }, []);
+function Cart({ cartItems }: any) {
+  const dispatch = useDispatch();
+  console.log(cartItems);
 
   return (
     <div className='absolute top-11 right-9 bg-black min-h-[256px] w-60 shadow-md pb-2  text-white'>
@@ -34,15 +21,15 @@ function Cart() {
       </div>
       <div className='w-full h-full flex justify-between flex-col'>
         <div className='p-4'>
-          {CartItems.length === 0 ? (
+          {cartItems?.length === 0 ? (
             <p className='mb-10'>Please add items to your cart</p>
           ) : (
-            CartItems.map((item: ItemType) => {
+            cartItems?.map((item: any) => {
               return (
                 <div className='flex gap-2 mb-2'>
                   <div className='bg-red-400 w-20 h-12'>image</div>
                   <div className='font-thin text-xs'>
-                    <p className='font-bold'>{item.title}</p>
+                    {/* <p className='font-bold'>{item.title}</p> */}
                     <p className='font-extralight'>{item.price}$</p>
                   </div>
                   <IoClose

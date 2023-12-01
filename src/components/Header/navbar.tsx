@@ -10,17 +10,50 @@ import { navLinksTypes } from "@/lib/types";
 import Link from "next/link";
 import Cart from "../Cart/cart";
 import { useDispatch, useSelector } from "react-redux";
-import { openCloseCart } from "@/lib/redux/cart/cartSlice";
+import {
+  fetchCart,
+  fetchCartCopy,
+  fetchCartLoading,
+  openCloseCart,
+  removeFromCart,
+} from "@/lib/redux/cart/cartSlice";
 import { RootState } from "@/lib/redux/store";
+import { fetchCartItems } from "@/server-actions/dbActions";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const { isCartopen, cartLength } = useSelector(
+  const { isCartopen, cartLength, CartItems } = useSelector(
     (state: RootState) => state.cart
   );
+  const { isSignedIn, userId } = useSelector((state: RootState) => state.user);
   const [toggle, setToggle] = useState<boolean>(false);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [hide, setHidden] = useState<boolean>(false);
+
+  type dataArray = {
+    data: {
+      id: string;
+      ItemId: string;
+      Quantity: number;
+      UserId: string;
+      price: number;
+    }[];
+  };
+
+  const fetchCart = async () => {
+    const data = await fetchCartItems(userId);
+    // @ts-ignore
+    dispatch(fetchCart(data));
+    console.log(data);
+  };
+  useEffect(() => {
+    fetchCart();
+    //  if (isSignedIn) {
+    //    fetchCart();
+    //  } else {
+    //    dispatch(fetchCartCopy());
+    //  }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +94,7 @@ function Navbar() {
               }}
             />
             <p>{cartLength}</p>
-            {isCartopen && <Cart />}
+            {isCartopen && <Cart cartItems={CartItems} />}
           </div>
           <div className='flex-btw gap-1'>
             <p>orders</p>
