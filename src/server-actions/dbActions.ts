@@ -68,8 +68,6 @@ export const addtoCartAction = async (
 };
 
 export const fetchCartItems = async (userId: string) => {
-  console.log(userId);
-
   try {
     const cartItems = await prisma.cartItem.findMany({
       where: {

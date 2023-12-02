@@ -21,27 +21,23 @@ function Cart({ cartItems }: any) {
       </div>
       <div className='w-full h-full flex justify-between flex-col'>
         <div className='p-4'>
-          {cartItems?.length === 0 ? (
-            <p className='mb-10'>Please add items to your cart</p>
-          ) : (
-            cartItems?.map((item: any) => {
-              return (
-                <div className='flex gap-2 mb-2'>
-                  <div className='bg-red-400 w-20 h-12'>image</div>
-                  <div className='font-thin text-xs'>
-                    {/* <p className='font-bold'>{item.title}</p> */}
-                    <p className='font-extralight'>{item.price}$</p>
-                  </div>
-                  <IoClose
-                    className='hover:text-red-500 focus:text-red-500'
-                    onClick={() => {
-                      dispatch(removeFromCart(item._id));
-                    }}
-                  />
+          {cartItems?.map((item: any) => {
+            return (
+              <div className='flex gap-2 mb-2'>
+                <div className='bg-red-400 w-20 h-12'>image</div>
+                <div className='font-thin text-xs'>
+                  {/* <p className='font-bold'>{item.title}</p> */}
+                  <p className='font-extralight'>{item.price}$</p>
                 </div>
-              );
-            })
-          )}
+                <IoClose
+                  className='hover:text-red-500 focus:text-red-500'
+                  onClick={() => {
+                    dispatch(removeFromCart(item._id));
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
         <div className='p-5'>
           <Link

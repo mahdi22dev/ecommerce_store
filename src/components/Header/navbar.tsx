@@ -41,6 +41,8 @@ function Navbar() {
   };
 
   const fetchCart = async () => {
+    console.log("fetching");
+
     const data = await fetchCartItems(userId);
     // @ts-ignore
     dispatch(fetchCart(data));
@@ -48,11 +50,6 @@ function Navbar() {
   };
   useEffect(() => {
     fetchCart();
-    //  if (isSignedIn) {
-    //    fetchCart();
-    //  } else {
-    //    dispatch(fetchCartCopy());
-    //  }
   }, []);
 
   useEffect(() => {
