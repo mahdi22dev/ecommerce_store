@@ -20,7 +20,6 @@ export const cartSlice = createSlice({
     CartItems: [] as cartItemsArray,
     addToCartLoading: false,
     fetchLoading: false,
-    cartLength: 0,
   },
   reducers: {
     openCloseCart: (state) => {
@@ -29,7 +28,7 @@ export const cartSlice = createSlice({
     addToCart: (state, actions) => {
       state.addToCartLoading = actions.payload;
     },
-    fetchCart: (state, actions) => {
+    fetchCartItems: (state, actions) => {
       state.CartItems = actions.payload;
     },
     fetchCartCopy: (state): any => {
@@ -52,7 +51,7 @@ export const cartSlice = createSlice({
 export const {
   openCloseCart,
   addToCart,
-  fetchCart,
+  fetchCartItems,
   removeFromCart,
   fetchCartCopy,
   fetchCartLoading,

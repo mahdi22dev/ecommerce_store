@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userId, userIsSignedIn } from "@/lib/redux/User/userSlice";
+import { RootState } from "@/lib/redux/store";
 
 function UserIdUpdater() {
   const user: any = useUser();
@@ -13,6 +14,7 @@ function UserIdUpdater() {
     dispatch(userId(id));
     dispatch(userIsSignedIn(isSignedIn));
   }, [user, isSignedIn]);
+
   return <></>;
 }
 

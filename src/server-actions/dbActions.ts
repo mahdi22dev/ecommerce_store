@@ -1,4 +1,5 @@
 "use server";
+import { cartItemsTypes } from "@/lib/types";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -9,7 +10,6 @@ export const addtoCartAction = async (
   price: number
 ): Promise<void> => {
   console.log(userId);
-
   let user;
   try {
     user = await prisma.user.findUnique({
@@ -62,24 +62,29 @@ export const addtoCartAction = async (
     }
   } catch (error: any) {
     console.error(error.message);
+    throw new Error("Failed to fetch cart items");
   } finally {
     await prisma.$disconnect();
   }
 };
 
-export const fetchCartItems = async (userId: string) => {
+export const CartItemsFetch = async (
+  userId: string
+): Promise<cartItemsTypes[]> => {
+  console.log(userId);
+
   try {
-    const cartItems = await prisma.cartItem.findMany({
+    const cartItems: cartItemsTypes[] = await prisma.cartItem.findMany({
       where: {
         user: {
           UserId: userId,
         },
       },
     });
-    console.log(cartItems);
     return cartItems;
   } catch (error: any) {
     console.error(error.message);
+    throw new Error("Failed to fetch cart items");
   } finally {
     await prisma.$disconnect();
   }

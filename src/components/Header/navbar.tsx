@@ -6,23 +6,18 @@ import { FiShoppingCart } from "react-icons/fi";
 import { MdCloseFullscreen } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
 import { navlinks } from "@/config/nav-links";
-import { navLinksTypes } from "@/lib/types";
+import { cartItemsTypes, navLinksTypes } from "@/lib/types";
 import Link from "next/link";
 import Cart from "../Cart/cart";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCart,
-  fetchCartCopy,
-  fetchCartLoading,
-  openCloseCart,
-  removeFromCart,
-} from "@/lib/redux/cart/cartSlice";
+import { fetchCartItems, openCloseCart } from "@/lib/redux/cart/cartSlice";
 import { RootState } from "@/lib/redux/store";
-import { fetchCartItems } from "@/server-actions/dbActions";
+import { CartItemsFetch } from "@/server-actions/dbActions";
+import { notifyError } from "@/lib/toast";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const { isCartopen, cartLength, CartItems } = useSelector(
+  const { isCartopen, CartItems } = useSelector(
     (state: RootState) => state.cart
   );
   const { isSignedIn, userId } = useSelector((state: RootState) => state.user);
@@ -30,27 +25,19 @@ function Navbar() {
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [hide, setHidden] = useState<boolean>(false);
 
-  type dataArray = {
-    data: {
-      id: string;
-      ItemId: string;
-      Quantity: number;
-      UserId: string;
-      price: number;
-    }[];
-  };
-
   const fetchCart = async () => {
-    console.log("fetching");
-
-    const data = await fetchCartItems(userId);
-    // @ts-ignore
-    dispatch(fetchCart(data));
-    console.log(data);
+    try {
+      const data = await CartItemsFetch(userId);
+      if (data) {
+        dispatch(fetchCartItems(data));
+      }
+    } catch (error: any) {
+      notifyError("error fetching cart items");
+    }
   };
   useEffect(() => {
     fetchCart();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,8 +77,8 @@ function Navbar() {
                 dispatch(openCloseCart());
               }}
             />
-            <p>{cartLength}</p>
-            {isCartopen && <Cart cartItems={CartItems} />}
+            <p>{CartItems.length}</p>
+            {isSignedIn && isCartopen && <Cart />}
           </div>
           <div className='flex-btw gap-1'>
             <p>orders</p>

@@ -1,8 +1,4 @@
 import FirstGrid from "@/components/Home/FirstGrid";
-import { allType } from "@/lib/sanity/sanityQuerieTypes";
-import { allProductSchema } from "@/lib/schema/schemaValidation";
-import { fetchCartItems } from "@/server-actions/dbActions";
-import { allFetch } from "@/server-actions/sanityActions";
 import Image from "next/image";
 import Link from "next/link";
 export default async function Home() {

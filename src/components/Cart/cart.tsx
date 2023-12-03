@@ -1,14 +1,18 @@
 "use client";
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openCloseCart, removeFromCart } from "@/lib/redux/cart/cartSlice";
 import Link from "next/link";
+import { cartItemsTypes } from "@/lib/types";
+import { RootState } from "@/lib/redux/store";
 
-function Cart({ cartItems }: any) {
+function Cart() {
+  const { CartItems } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  console.log(cartItems);
-
+  console.log("displaying data from cart component");
+  console.log(CartItems);
+  console.log("done displaying data from cart component");
   return (
     <div className='absolute top-11 right-9 bg-black min-h-[256px] w-60 shadow-md pb-2  text-white'>
       <div className='flex justify-end w-full'>
@@ -20,25 +24,29 @@ function Cart({ cartItems }: any) {
         />
       </div>
       <div className='w-full h-full flex justify-between flex-col'>
-        <div className='p-4'>
-          {cartItems?.map((item: any) => {
-            return (
-              <div className='flex gap-2 mb-2'>
-                <div className='bg-red-400 w-20 h-12'>image</div>
-                <div className='font-thin text-xs'>
-                  {/* <p className='font-bold'>{item.title}</p> */}
-                  <p className='font-extralight'>{item.price}$</p>
+        {CartItems.length == 0 ? (
+          <p>Please add items to cart</p>
+        ) : (
+          <div className='p-4'>
+            {CartItems?.map((item: any) => {
+              return (
+                <div className='flex gap-2 mb-2'>
+                  <div className='bg-red-400 w-20 h-12'>image</div>
+                  <div className='font-thin text-xs'>
+                    {/* <p className='font-bold'>{item.title}</p> */}
+                    <p className='font-extralight'>{item.price}$</p>
+                  </div>
+                  <IoClose
+                    className='hover:text-red-500 focus:text-red-500'
+                    onClick={() => {
+                      dispatch(removeFromCart(item._id));
+                    }}
+                  />
                 </div>
-                <IoClose
-                  className='hover:text-red-500 focus:text-red-500'
-                  onClick={() => {
-                    dispatch(removeFromCart(item._id));
-                  }}
-                />
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
         <div className='p-5'>
           <Link
             href={"/"}

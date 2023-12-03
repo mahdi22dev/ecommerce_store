@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
   name: "cart",
-  initialState: { userId: "", isSignedIn: false, errorMessage: "" },
+  initialState: { userId: "", isSignedIn: false },
   reducers: {
     userId: (state, actions) => {
       state.userId = actions.payload;
@@ -12,14 +12,10 @@ export const userSlice = createSlice({
     userIsSignedIn: (state, actions) => {
       state.isSignedIn = actions.payload;
     },
-    errorMessageUpdater: (state, actions) => {
-      state.errorMessage = actions.payload;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { userId, userIsSignedIn, errorMessageUpdater } =
-  userSlice.actions;
+export const { userId, userIsSignedIn } = userSlice.actions;
 
 export default userSlice.reducer;

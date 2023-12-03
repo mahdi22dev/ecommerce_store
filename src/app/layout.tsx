@@ -5,6 +5,7 @@ import Navbar from "@/components/Header/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import StoreProvider from "@/lib/redux/StoreProvider";
 import UserIdUpdater from "@/components/User/UserIdUpdater";
+import { ToastContainer } from "react-toastify";
 
 const lato = Lato({ weight: "400", preload: false });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <ClerkProvider>
         <html lang='en'>
           <body className={lato.className}>
+            <ToastContainer />
             <UserIdUpdater />
             <Navbar />
             {children}
