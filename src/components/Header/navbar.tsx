@@ -32,7 +32,7 @@ function Navbar() {
         dispatch(fetchCartItems(data));
       }
     } catch (error: any) {
-      notifyError("error fetching cart items");
+      notifyError("error fetching cart items.");
     }
   };
   useEffect(() => {
