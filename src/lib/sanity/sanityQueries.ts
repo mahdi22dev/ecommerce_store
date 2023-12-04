@@ -1,1 +1,1 @@
-export const allQuery = '*[_type == "product"]';
+export const allQuery = '*[_type == "product"]{...,images[]->}';

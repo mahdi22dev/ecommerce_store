@@ -42,7 +42,6 @@ export const cartSlice = createSlice({
       state.CartItems = state.CartItems.filter(
         (item: ItemType) => item._id !== id
       );
-      console.log(state.CartItems);
     },
   },
 });

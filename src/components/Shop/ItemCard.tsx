@@ -1,23 +1,25 @@
 "use client";
 import { addToCart } from "@/lib/redux/cart/cartSlice";
 import { RootState } from "@/lib/redux/store";
+import { urlFor } from "@/lib/sanity-utils";
 import { addtoCartAction } from "@/server-actions/dbActions";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { urlFor } from "@/utils/sanity-utils";
 
 type item = {
   item: {
     _id: string;
     title: string;
     price: number;
-    images : string[]
+    images: any;
   };
 };
 
 function ItemCard({ item }: item) {
   console.log(item);
- const imageSrc = urlFor(item.images[0].).width(500).height(500).url();
+  const imageSrc = urlFor(item.images[0].image).width(50).height(50).url();
+  console.log(imageSrc);
+
   const { userId, isSignedIn } = useSelector((state: RootState) => state.user);
   const { addToCartLoading } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
@@ -32,11 +34,12 @@ function ItemCard({ item }: item) {
               dispatch(addToCart(false));
               const data = {
                 itemId: item._id,
-                userId: userId,
                 price: item.price,
-                title: item._id,
+                title: item.title,
+                imageUrl: imageSrc,
+                Quantity: 1,
               };
-              await addtoCartAction(data.userId, data.itemId, 1, data.price);
+              await addtoCartAction(data, userId);
               dispatch(addToCart(true));
             } else {
               const cartItemObj = { ItemId: item._id, Quantity: 1 };
