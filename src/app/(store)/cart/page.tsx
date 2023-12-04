@@ -1,9 +1,14 @@
 import PageCart from "@/components/Cart/PageCart";
-import { auth } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 
-function page() {
-  const { userId }: { userId: string | null } = auth();
-  console.log(userId);
+async function page() {
+  try {
+    const user = await fetch("http://localhost:3000/user");
+    const userId = await user.json();
+    console.log(userId);
+  } catch (error) {
+    console.log(error.message);
+  }
 
   return (
     <main className='flex w-full p-5 min-h-screen mx-auto flex-col items-center justify-between'>
