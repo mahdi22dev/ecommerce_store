@@ -22,7 +22,9 @@ model CartItem {
   Quantity      Int  
   user          User     @relation(fields: [UserId], references: [id])   
   UserId        String   @db.ObjectId
+  title         String  
   price         Int
+  imageUrl      String
 }
 
 model Address {

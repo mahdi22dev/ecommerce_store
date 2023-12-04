@@ -1,10 +1,9 @@
-import { allType } from "@/lib/sanity/sanityQuerieTypes";
 import { allFetch } from "@/server-actions/sanityActions";
 import React from "react";
 import ItemCard from "./ItemCard";
 
 async function Items() {
-  let products: allType;
+  let products;
   try {
     products = await allFetch();
   } catch (error) {

@@ -4,16 +4,20 @@ import { RootState } from "@/lib/redux/store";
 import { addtoCartAction } from "@/server-actions/dbActions";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { urlFor } from "@/utils/sanity-utils";
 
 type item = {
   item: {
     _id: string;
     title: string;
     price: number;
+    images : string[]
   };
 };
 
 function ItemCard({ item }: item) {
+  console.log(item);
+ const imageSrc = urlFor(item.images[0].).width(500).height(500).url();
   const { userId, isSignedIn } = useSelector((state: RootState) => state.user);
   const { addToCartLoading } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
@@ -30,6 +34,7 @@ function ItemCard({ item }: item) {
                 itemId: item._id,
                 userId: userId,
                 price: item.price,
+                title: item._id,
               };
               await addtoCartAction(data.userId, data.itemId, 1, data.price);
               dispatch(addToCart(true));

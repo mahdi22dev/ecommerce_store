@@ -25,7 +25,7 @@ function Cart() {
       </div>
       <div className='w-full h-full flex justify-between flex-col'>
         {CartItems.length == 0 ? (
-          <p>Please add items to cart</p>
+          <p className='mb-[50%] mx-auto'>Please add items to cart</p>
         ) : (
           <div className='p-4'>
             {CartItems?.map((item: any) => {
@@ -47,7 +47,7 @@ function Cart() {
             })}
           </div>
         )}
-        <div className='p-5'>
+        <div className='p-5 mt-auto'>
           <Link
             href={"/"}
             className='px-5 py-2 bg-primary/50 hover:bg-secondary focus:bg-secondary border border-black border-opacity-0 hover:border-opacity-100 focus:border-opacity-100  center cursor mb-1 delay-ms'
